@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eee7f7">
+<meta name="description" content="王小花｜哈哈北筆。聯絡資訊與電子名片。">
+<title>王小花｜哈哈北筆</title>
+<style>
+:root{--bg:#eee7f7;--card:#fff;--ink:#2a1f3d;--mute:#6b5f80;--line:#ddd2ee;--brand:#5b3a9e;--brandfg:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1528;--card:#271d38;--ink:#efe9f8;--mute:#b3a6c9;--line:#3d3055;--brand:#b79cf0;--brandfg:#1c1528}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:28px 16px;background:var(--bg);color:var(--ink);font:400 16px/1.65 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+main{width:100%;max-width:480px;background:var(--card);border-radius:18px;padding:32px 26px;border:1px solid var(--line)}
+.co{color:var(--mute);margin:0}
+h1{font-size:34px;line-height:1.2;margin:6px 0 24px;font-weight:700}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.btn{flex:1 1 120px;text-align:center;padding:11px 14px;border-radius:10px;border:1px solid var(--brand);color:var(--brand);text-decoration:none;background:none;font:inherit;font-weight:500;cursor:pointer}
+.btn.pri{background:var(--brand);color:var(--brandfg)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+h2{font-size:15px;color:var(--mute);margin:0 0 10px;font-weight:500}
+dl{margin:0}
+dt{font-size:13px;color:var(--mute);margin-top:14px}
+dd{margin:0;word-break:break-all}
+dd a{color:var(--brand)}
+#msg{margin:14px 0 0;color:var(--mute);font-size:14px;min-height:1.6em}
+</style>
+</head>
+<body>
+<main>
+<p class="co">哈哈北筆</p>
+<h1>王小花</h1>
+<div class="btns">
+<a class="btn pri" href="tel:+886987654387">撥打電話</a>
+<a class="btn" href="mailto:WangSiwFa@yahoo.com.tw">寄送電子郵件</a>
+<button class="btn" id="save" type="button">儲存聯絡人</button>
+</div>
+<h2>聯絡資訊</h2>
+<dl>
+<dt>公司電話</dt><dd><a href="tel:+886987654387">0987-654-387</a></dd>
+<dt>電子郵件</dt><dd><a href="mailto:WangSiwFa@yahoo.com.tw">WangSiwFa@yahoo.com.tw</a></dd>
+<dt>公司地址</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E5%8C%97%E5%B8%82%E9%9B%99%E5%92%8C%E5%8D%80" target="_blank" rel="noopener">新北市雙和區（開啟地圖）</a></dd>
+</dl>
+<p id="msg" role="status"></p>
+</main>
+<script>
+document.getElementById('save').addEventListener('click',function(){
+  var v=['BEGIN:VCARD','VERSION:3.0',
+    'N;CHARSET=UTF-8:王;小花;;;','FN;CHARSET=UTF-8:王小花',
+    'ORG;CHARSET=UTF-8:哈哈北筆',
+    'TEL;TYPE=WORK,VOICE:+886-987-654-387',
+    'EMAIL;TYPE=INTERNET,WORK:WangSiwFa@yahoo.com.tw',
+    'ADR;TYPE=WORK;CHARSET=UTF-8:;;雙和區;新北市;;;台灣',
+    'END:VCARD'].join('\r\n')+'\r\n';
+  var blob=new Blob([v],{type:'text/vcard;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='王小花.vcf';
+  document.body.appendChild(a);a.click();a.remove();
+  document.getElementById('msg').textContent='已產生名片檔，請在手機上開啟並選擇加入聯絡人。';
+});
+</script>
+</body>
+</html>
